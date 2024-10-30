@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>Book Store</title>
-        <!-- <link rel="stylesheet" href="<c:url value='/styles/style.css' />"> -->
+<link rel="stylesheet" href="styles/style.css">
     </head>
 <body>
 

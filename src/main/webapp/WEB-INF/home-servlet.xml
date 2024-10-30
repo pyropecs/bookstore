@@ -15,7 +15,7 @@
         <property name="suffix" value=".jsp" />
 
     </bean>
-    <!-- <mvc:resources location="/styles/" mapping="/styles/**" /> -->
+ 
    
     <bean name="dataSource" class="org.mariadb.jdbc.MariaDbDataSource">
         <property name="user" value="root">
