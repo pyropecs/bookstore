@@ -12,21 +12,21 @@
     
 <div class="mwb-form-main-wrapper">
 		<div class="mwb-form-main-container">
-			<h1>Create User</h1>
-			<form action="users/add" method="post" onSubmit="return checkAllValues()">
+			<h1>Create Book</h1>
+			<form action="books/add" method="post" onSubmit="return checkAllValues()">
 				<div class="mwb-form-group">
-					<input type="text" onChange="" class="mwb-form-control" placeholder="Enter your username*" value="" name="username" id="name">
+					<input type="text" onChange="" class="mwb-form-control" placeholder="Enter Book Name*" value="" name="name" id="name">
 				
 					<div class="mwb-form-error" id="name-error">This Field Required*</div>
 				</div>
 				<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your Department*" name="department" id="department">
+					<input type="text" class="mwb-form-control" placeholder="Enter Author*" name="author" id="author">
 					
-					<div class="mwb-form-error" id="department-error">This Field Required*</div>
+					<div class="mwb-form-error" id="author-error">This Field Required*</div>
 				</div>
 				<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your designation*" name="designation" id="designation">
-					<div class="mwb-form-error" id="designation-error">This Field Required*</div>
+					<input type="text" class="mwb-form-control" placeholder="Enter The Price*" name="price" id="price">
+					<div class="mwb-form-error" id="price-error">This Field Required*</div>
 				</div>
 				
 				<div class="mwb-form-group">
