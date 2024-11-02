@@ -7,5 +7,9 @@
         <property name="username" column="username"/>
         <property name="department" column="department" />
         <property name="designation" column="designation" />
+        <set name="books" table="books_users" inverse="true" cascade="save-update">
+            <key column="user_id" />
+            <many-to-many column="book_id" class="com.library.models.Book" />
+        </set>
     </class>
 </hibernate-mapping>

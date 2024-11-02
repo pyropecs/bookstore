@@ -2,6 +2,7 @@ package com.library.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,13 +25,20 @@ public class UserController {
     private UserRepository repository;
 
     @GetMapping("/users")
-    public String getMethodName() {
+    public String createUserPage() {
         return "createuser";
+    }
+
+    @GetMapping("/users/all")
+    public List<User> getAllUsers() {
+        List<User> users = repository.getAllUsers();
+        return users;
+
     }
 
     @PostMapping("/users/add")
     public ResponseEntity createUser(@ModelAttribute User user) {
-        
+
         try {
             repository.insertUser(user);
             return new ResponseEntity<>(HttpStatus.CREATED).created(new URI("/alpha")).build();

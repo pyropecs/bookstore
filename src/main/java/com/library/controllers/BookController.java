@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.library.models.Book;
-import com.library.models.User;
 import com.library.repositories.BookRepository;
 
 @Controller
@@ -19,9 +18,10 @@ public class BookController {
         @Autowired
         private BookRepository repository;
          @GetMapping("/books")
-    public String getMethodName() {
+    public String getCreateBookPage() {
         return "createbook";
     }
+
 
 
 @PostMapping("/books/add")

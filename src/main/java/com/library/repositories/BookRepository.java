@@ -14,9 +14,10 @@ import com.library.models.User;
 
 @Repository
 public class BookRepository {
-        @Autowired
-    private SessionFactory sessionFactory ;
-  public void insertBook(Book book) {
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    public void insertBook(Book book) {
         Session session = sessionFactory.openSession();
         try {
             session.save(book);
@@ -29,19 +30,20 @@ public class BookRepository {
 
     }
 
-public List<User> getAllBooks() {
+
+    public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();
-        List<User> users = null;
+        List<Book> books = null;
         try {
             Query query = session.createQuery("from Book");
-            users = query.getResultList();
+            books = query.getResultList();
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " UserRepository.getAllBooks()");
             e.printStackTrace();
         } finally {
             session.close();
         }
-        return users;
+        return books;
     }
 
 }
