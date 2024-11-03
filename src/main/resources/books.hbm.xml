@@ -7,11 +7,10 @@
         <property name="name" column="name"/>
         <property name="author" column="author" />
         <property name="price" column="price" />
-                <set name="users" table="books_users" cascade="save-update">
+               <set name="users" table="books_users" cascade="all"> <!-- Change list to set -->
             <key column="book_id" />
             <many-to-many column="user_id" class="com.library.models.User" />
         </set>
-
 </class>
 
 

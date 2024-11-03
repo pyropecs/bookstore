@@ -1,12 +1,12 @@
 package com.library.models;
-import java.util.List;
+import java.util.Set;
 
 public class User {
  private int id;
  private String username;
  private String department;
  private String designation;
- private List<Book> books;
+ private Set<Book> books;
  public int getId() {
      return id;
  }
@@ -20,7 +20,7 @@ public class User {
      return username;
  }
 
- public List<Book> getBooks() {
+ public Set<Book> getBooks() {
          return books;
  }
  public void setId(int id) {
@@ -35,7 +35,7 @@ public class User {
  public void setUsername(String username) {
      this.username = username;
  }
- public void setBooks(List<Book> books) {
+ public void setBooks(Set<Book> books) {
          this.books = books;
  }
 }

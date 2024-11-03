@@ -1,13 +1,13 @@
 package com.library.models;
 
-import java.util.List;
+import java.util.Set;
 public class Book {
 
 private int id;
 private String name;
 private String author;
 private float price;
-private List<User> users;
+private Set<User> users;
 
 public int getId() {
         return id;
@@ -21,10 +21,10 @@ public String getName() {
 public float getPrice() {
         return price;
 }
-public List<User> getUsers() {
+public Set<User> getUsers() {
         return users;
 }
-public void setUsers(List<User> users) {
+public void setUsers(Set<User> users) {
         this.users = users;
 }
 public void setAuthor(String author) {

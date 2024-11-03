@@ -2,10 +2,13 @@ package com.library.repositories;
 
 import java.util.List;
 
+
 import javax.persistence.Query;
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,15 +33,43 @@ public class BookRepository {
 
     }
 
+    public void insertUsersToBook(int bookId, List<Integer> userIds) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            
+            Book book = session.get(Book.class, bookId);
+        
+            // Add users to the book
+            for (Integer userId : userIds) {
+                User user = session.get(User.class, userId);
+                book.getUsers().add(user);
+                user.getBooks().add(book); 
+            }
+            session.saveOrUpdate(book);
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+            System.out.println("Exception occurred " + e.getMessage() + " BookRepository.insertUsersToBook()");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 
     public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();
         List<Book> books = null;
         try {
-            Query query = session.createQuery("from Book");
+            Query query = session.createQuery("Select b from Book b");
             books = query.getResultList();
         } catch (Exception e) {
-            System.out.println("Exception occurred " + e.getMessage() + " UserRepository.getAllBooks()");
+            System.out.println("Exception occurred " + e.getMessage() + " BookRepository.getAllBooks()");
             e.printStackTrace();
         } finally {
             session.close();
