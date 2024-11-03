@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,18 +25,22 @@ public class BookController {
 
 
 
-@PostMapping("/books/add")
-    public ResponseEntity createBook(@ModelAttribute Book book) {
+    @PostMapping("/books/add")
+    public String createBook(@ModelAttribute Book book,Model model) {
         
         try {
             repository.insertBook(book);
-            return new ResponseEntity<>(HttpStatus.CREATED).created(new URI("/alpha")).build();
+            model.addAttribute("message","book successfully created");
+            return "alertmessage";
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            model.addAttribute("message", "book successfully created");
+            return "alertmessage";
         }
     }
+ 
+    
 
 }

@@ -17,8 +17,10 @@
                                 <div class="mwb-form-main-container">
                                         <h1>Add Users To Book</h1>
                                         <form action="addusers/insert" method="post" onSubmit="return checkAllValues()">
-                                                <div class="mwb-form-group">
-                                                        <select name="bookId" id="bookSelect">
+                                                <div class="mwb-form-group select-form">
+                                                        <label for="">Select Book:</label>
+                                                        <select name="bookId" id="bookSelect" onchange="getUsers(this)">
+                                                        <option value="Select book" selected hidden disabled></option>
                                                                 <% List<Book> books = (List<Book>)
                                                                                 request.getAttribute("books");
                                                                                 if (books != null) {
@@ -39,7 +41,12 @@
                                                         </div>
                                                 </div>
 
+                                                <div class="">
+                                                                <label >Select users to Add Book</label>
+                                                </div>
                                                 <div class="mwb-form-group checkboxes" >
+                                                        
+                                                        
                                                         <% List<User> users = (List<User>)
                                                                         request.getAttribute("users");
                                                                         if (users != null) {

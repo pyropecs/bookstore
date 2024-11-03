@@ -32,6 +32,7 @@ public class BookRepository {
         }
 
     }
+    
 
     public void insertUsersToBook(int bookId, List<Integer> userIds) {
         Session session = sessionFactory.openSession();
@@ -39,11 +40,7 @@ public class BookRepository {
 
         try {
             transaction = session.beginTransaction();
-
-            
             Book book = session.get(Book.class, bookId);
-        
-            // Add users to the book
             for (Integer userId : userIds) {
                 User user = session.get(User.class, userId);
                 book.getUsers().add(user);
@@ -62,10 +59,28 @@ public class BookRepository {
         }
     }
 
+public Book getBook(Integer... id){
+    Session session = sessionFactory.openSession();
+    Book book = null;
+    try {
+
+        Query query = session.createQuery("Select b from Book b where b.id = :bookid");
+        query.setParameter("bookid", id[0] );
+         book = (Book) query.getSingleResult();
+    } catch (Exception e) {
+        System.out.println("Exception occurred " + e.getMessage() + " BookRepository.getAllBooks()");
+        e.printStackTrace();
+    } finally {
+        session.close();
+    }
+return book;
+}
+
     public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();
         List<Book> books = null;
         try {
+            
             Query query = session.createQuery("Select b from Book b");
             books = query.getResultList();
         } catch (Exception e) {

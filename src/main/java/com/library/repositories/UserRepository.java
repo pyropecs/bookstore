@@ -30,12 +30,14 @@ public class UserRepository {
 
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(Integer... bookidIntegers) {
         Session session = sessionFactory.openSession();
         List<User> users = null;
         try {
-            Query query = session.createQuery("from User");
+            String hql = bookidIntegers.length == 0 ? "from User":"Select u from User u join u.books b where b.id = " + bookidIntegers[0];
+            Query query = session.createQuery(hql);
             users = query.getResultList();
+  
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " UserRepository.getAllUsers()");
             e.printStackTrace();

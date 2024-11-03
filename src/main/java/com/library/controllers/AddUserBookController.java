@@ -34,7 +34,8 @@ public String getAddUserToPage(Model model){
         List<User> users = userRepository.getAllUsers();
         System.out.println(books.size());
         model.addAttribute("books",books);
-        model.addAttribute("users",users);        
+        model.addAttribute("users", users);
+
         return "addusertobook";
 }
 

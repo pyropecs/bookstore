@@ -11,6 +11,10 @@ const name = document.querySelector(`#${fields[0]}`);
   isNotError = checkLengthError(name, fields[0]) 
   isNotError = checkLengthError(department, fields[1]) 
   isNotError = checkLengthError(designation, fields[2]);
+  if(fields[2] === "price"){
+    console.log(fields[2]);
+    isNotError = checkNumber(designation,fields[2]);
+  }
   return isNotError;
 }
 function checkLengthError(element, field) {
@@ -27,4 +31,29 @@ function checkLengthError(element, field) {
     isNotError = false;
   }
   return isNotError;
+}
+function checkNumber(element,field){
+  const value = Number(element.value);
+  
+  const errorElement = document.querySelector(`#${field}-error`);
+let isNotError = true;
+  errorElement.classList.remove("show");
+  if(isNaN(value) ){
+        errorMessage = field + " Should be Number";
+
+        errorElement.textContent = errorMessage;
+        errorElement.classList.add("show");
+        isNotError = false;
+  }
+return isNotError;
+}
+
+
+
+
+async function getUsers(e){
+const selectedValue = e.value;
+const response = await fetch(`users/all/${selectedValue}`);
+const result = response.json();
+console.log(result);
 }

@@ -7,6 +7,7 @@ body {
   width: 100%;
   margin: 0%;
   padding: 0%;
+  font-family: sans-serif;
 }
 
 .wrap {
@@ -156,13 +157,27 @@ body {
 .show{
   display:block;
 }
+.align-center{
+  align-items: center;
+}
 
 .checkboxes{
   display:flex;
+  flex-wrap:wrap;
 }
 .checkbox-container{
   padding:1%;
 }
+.select-form{
+  display:flex;
+justify-content: center;
+}
+.select-form > select{
+  width:50%;
+  height:5%;
+}
+
+
 @media (max-width: 768px) {
   .mwb-form-main-container {
     width: 75%;
@@ -173,4 +188,38 @@ body {
   .mwb-form-main-container {
     width: 95%;
   }
+}
+
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200,200,200);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: purple;
+  color:white;
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: #e5b5e5;
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245,245,245);
+}
+
+caption {
+  padding: 10px;
 }
