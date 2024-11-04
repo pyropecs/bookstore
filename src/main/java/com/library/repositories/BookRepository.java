@@ -49,8 +49,7 @@ public class BookRepository {
             transaction.commit();
 
         } catch (Exception e) {
-            if (transaction != null)
-                transaction.rollback();
+            if (transaction != null) transaction.rollback();
             System.out.println("Exception occurred " + e.getMessage() + " BookRepository.insertUsersToBook()");
             e.printStackTrace();
         } finally {
@@ -58,22 +57,6 @@ public class BookRepository {
         }
     }
 
-public Book getBook(Integer... id){
-    Session session = sessionFactory.openSession();
-    Book book = null;
-    try {
-
-        Query query = session.createQuery("Select b from Book b where b.id = :bookid");
-        query.setParameter("bookid", id[0] );
-         book = (Book) query.getSingleResult();
-    } catch (Exception e) {
-        System.out.println("Exception occurred " + e.getMessage() + " BookRepository.getAllBooks()");
-        e.printStackTrace();
-    } finally {
-        session.close();
-    }
-return book;
-}
 
     public List<Book> getAllBooks() {
         Session session = sessionFactory.openSession();

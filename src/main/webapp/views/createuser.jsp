@@ -15,7 +15,7 @@
 			<h1>Create User</h1>
 			<form action="users/add" method="post" onSubmit="return checkAllValues()">
 				<div class="mwb-form-group">
-					<input type="text" onChange="" class="mwb-form-control" placeholder="Enter your username*" value="" name="username" id="name">
+					<input type="text" class="mwb-form-control" placeholder="Enter your username*" value="" name="username" id="name">
 				
 					<div class="mwb-form-error" id="name-error">This Field Required*</div>
 				</div>
@@ -29,7 +29,8 @@
 					<div class="mwb-form-error" id="designation-error">This Field Required*</div>
 				</div>
 				
-				<div class="mwb-form-group">
+				<div class="mwb-form-group flex">
+				<a href="/bookstore" style="width: 100%;"> <button type="button" class="mwb-form-submit-btn submit-back-btn" >Back</button></a>	
 					<button type="submit"  class="mwb-form-submit-btn" >Submit</button>
 				</div>
 			</form>

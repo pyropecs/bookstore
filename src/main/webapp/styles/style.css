@@ -146,7 +146,7 @@ body {
   cursor: pointer;
   display: inline-block;
   font-size: 14px;
-  width: 100%;
+  width: 96%;
   padding: 16px 10px;
 }
 
@@ -162,6 +162,11 @@ body {
 }
 .align-center {
   align-items: center;
+  
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
 }
 
 .checkboxes {
@@ -196,7 +201,26 @@ body {
   justify-content: center;
   padding-bottom: 3%;
 }
+.column{
+  flex-direction: column;
+}
+.back-btn{
+  width:100%;
+  background-color: #202438;
+  color:white;
+}
+.submit-back-btn{
+  background-color: #202438;
+  color:white;
+}
 
+.back-btn:hover{
+  background-color: #141724;
+}
+
+.back-btn-link{
+  width:10%;
+}
 @media (max-width: 768px) {
   .mwb-form-main-container {
     width: 75%;
@@ -209,6 +233,15 @@ body {
   }
   .select-form > select {
     width: 70%;
+  }
+  .btn-container{
+    grid-template-columns: 1fr;
+  }
+  .container{
+    width:85%;
+  }
+  .booktitle{
+    font-size: 32px;
   }
 }
 

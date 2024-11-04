@@ -8,17 +8,17 @@ function checkAllValues() {
     currentPath === "books"
       ? ["name", "author", "price"]
       : ["name", "department", "designation"];
-  const name = document.querySelector(`#${fields[0]}`);
-  const department = document.querySelector(`#${fields[1]}`);
-  const designation = document.querySelector(`#${fields[2]}`);
+  const field1 = document.querySelector(`#${fields[0]}`);
+  const field2 = document.querySelector(`#${fields[1]}`);
+  const field3 = document.querySelector(`#${fields[2]}`);
   let isNotError = true;
 
-  isNotError = checkLengthError(name, fields[0]);
-  isNotError = checkLengthError(department, fields[1]);
-  isNotError = checkLengthError(designation, fields[2]);
+  isNotError = checkLengthError(field1, fields[0]);
+  isNotError = checkLengthError(field2, fields[1]);
+  isNotError = checkLengthError(field3, fields[2]);
 
   if (fields[2] === "price") {
-    isNotError = checkNumber(designation, fields[2]);
+    isNotError = checkNumber(field3, fields[2]);
   }
   return isNotError;
 }
@@ -36,7 +36,7 @@ function checkLengthError(element, field) {
     errorElement.textContent = errorMessage;
     errorElement.classList.add("show");
     isNotError = !isNotError;
-  }else if (element.value.length > 100) {
+  } else if (element.value.length > 100) {
     const errorMessage =
       String(field).charAt(0).toUpperCase() +
       String(field).slice(1) +
@@ -45,9 +45,21 @@ function checkLengthError(element, field) {
     errorElement.textContent = errorMessage;
     errorElement.classList.add("show");
     isNotError = !isNotError;
-  }
+  } else if (hasLeadingOrTrailingSpaces(element.value)) {
+    const errorMessage = "trailing and leading spaces are not allowed";
 
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add("show");
+    isNotError = !isNotError;
+  }
   return isNotError;
+}
+
+function hasLeadingOrTrailingSpaces(str) {
+  const leadingSpace = /^\s/; // Checks for leading space
+  const trailingSpace = /\s$/; // Checks for trailing space
+
+  return leadingSpace.test(str) || trailingSpace.test(str);
 }
 
 function checkEmptySelected() {
@@ -88,7 +100,8 @@ function checkNumber(element, field) {
     errorElement.classList.add("show");
     isNotError = !isNotError;
   } else if (element.value.length > 7) {
-   const errorMessage = String(field).charAt(0).toUpperCase() +
+    const errorMessage =
+      String(field).charAt(0).toUpperCase() +
       String(field).slice(1) +
       " should be less than 7 digits";
 

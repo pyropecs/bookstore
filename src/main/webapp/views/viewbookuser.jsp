@@ -8,8 +8,8 @@
 
 <body>
         
-     <div class="wrap align-center" >
-      
+     <div class="wrap align-center column" >
+     
 <table>
   <thead>
     <tr>
@@ -46,8 +46,9 @@
   <% } %>
   </tbody>
  
-   
+  
     </table>
+    <a href="/bookstore" class="back-btn-link"><button class="btn back-btn">Back</button></a>
      </div>   
 
 </body>
