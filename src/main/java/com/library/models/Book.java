@@ -1,12 +1,15 @@
 package com.library.models;
 
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Book {
 
 private int id;
 private String name;
 private String author;
 private float price;
+@JsonManagedReference
 private Set<User> users;
 
 public int getId() {

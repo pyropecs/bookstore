@@ -13,7 +13,7 @@
 
           <a href="books"><button class="btn">Create Book</button></a>
           <a href="addusers"><button class="btn">Add User Book</button></a>
-          <a href="viewusers"><button class="btn">View User List</button></a>
+          <a href="view"><button class="btn">View User List</button></a>
         </div>
       </div>
     </div>

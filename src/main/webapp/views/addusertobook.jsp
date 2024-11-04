@@ -16,11 +16,11 @@
                         <div class="mwb-form-main-wrapper">
                                 <div class="mwb-form-main-container">
                                         <h1>Add Users To Book</h1>
-                                        <form action="addusers/insert" method="post" onSubmit="return checkAllValues()">
-                                                <div class="mwb-form-group select-form">
-                                                        <label for="">Select Book:</label>
-                                                        <select name="bookId" id="bookSelect" onchange="getUsers(this)">
-                                                        <option value="Select book" selected hidden disabled></option>
+                                        <form action="addusers/insert" method="post" onSubmit="return checkEmptySelected()">
+                                                <div class="mwb-form-group select-form no-margin">
+                                                        
+                                                        <select name="bookId" id="bookselect" onchange="getUsers(this)">
+                                                        <option value="" selected hidden disabled>Select Book</option>
                                                                 <% List<Book> books = (List<Book>)
                                                                                 request.getAttribute("books");
                                                                                 if (books != null) {
@@ -36,12 +36,12 @@
                                                                                         <% } %>
                                                         </select>
 
-                                                        <div class=" mwb-form-error" id="name-error">This Field
+                                                        <div class=" mwb-form-error" id="select-error">This Field
                                                                 Required*
                                                         </div>
                                                 </div>
 
-                                                <div class="">
+                                                <div class="center">
                                                                 <label >Select users to Add Book</label>
                                                 </div>
                                                 <div class="mwb-form-group checkboxes" >
@@ -54,9 +54,10 @@
                                                                         %>
                                                                         <div class="checkbox-container">
                                                                                 <input type="checkbox" name="userIds"
+                                                                                class="checkbox"
                                                                                         id="<%= user.getId() %>"
                                                                                         value="<%=user.getId() %>">
-                                                                                <label for="<%= user.getId() %>">
+                                                                                <label class="user-list" for="<%= user.getId() %>">
                                                                                         <%= user.getUsername() %>
                                                                                 </label>
                                                                         </div>

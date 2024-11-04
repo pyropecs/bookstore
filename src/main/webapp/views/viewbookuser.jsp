@@ -8,28 +8,45 @@
 
 <body>
         
-     <div class="wrap"  style="background-color:white; align-items: center;">
+     <div class="wrap align-center" >
+      
 <table>
-      <tr>
+  <thead>
+    <tr>
         
-        <th>Book Name</th>
-        <th>Users</th>
-        
-      </tr>
-      <% List<Book> books = (List<Book>) request.getAttribute("books");
-        for(Book book:books){
-        %>
-    <tr>  
-  <td><%=book.getName()%></td>
-     <td>
-        <% Set<User> users = book.getUsers();
-                
-                for(User user:users){ %>
-        <%=user.getUsername() %>,
-        <% } %>
+      <th>Book Name</th>
+      <th>Users</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% List<Book> books = (List<Book>) request.getAttribute("books");
+      for(Book book:books){
+      %>
+  <tr>  
+<td><%=book.getName()%></td>
+<td>
+  <% 
+      Set<User> users = book.getUsers();
+      if (users.isEmpty()) { 
+  %>
+      No users found
+  <% 
+      } else {
+          for (User user : users) { 
+  %>
+      <%= user.getUsername() %>,
+  <% 
+          } 
+      } 
+  %>
 </td>
-  </tr>
-    <% } %>
+</tr>
+  <% } %>
+  </tbody>
+ 
+   
     </table>
      </div>   
 

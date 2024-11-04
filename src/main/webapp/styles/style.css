@@ -71,6 +71,10 @@ body {
   width: 100%;
 }
 
+.btn:hover {
+  background-color: rgb(111, 1, 111);
+}
+
 .btn:disabled {
   cursor: default;
 }
@@ -94,7 +98,6 @@ body {
 .mwb-form-main-container {
   background-color: #fff;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.11);
-  color: #7b7878;
 
   width: 50%;
 }
@@ -154,29 +157,45 @@ body {
   padding-top: 2px;
 }
 
-.show{
-  display:block;
+.show {
+  display: block;
 }
-.align-center{
+.align-center {
   align-items: center;
 }
 
-.checkboxes{
-  display:flex;
-  flex-wrap:wrap;
+.checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.checkbox-container{
-  padding:1%;
+.checkbox-container {
+  padding: 1% 2%;
+  display: flex;
+  max-width:20%;
 }
-.select-form{
-  display:flex;
-justify-content: center;
+.select-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 10%;
 }
-.select-form > select{
-  width:50%;
-  height:5%;
+.select-form > select {
+  width: 50%;
+  height: 35%;
+  font-size: 16px;
+  padding-inline: 10px;
+  margin-bottom: 2%;
+}
+.no-margin {
+  margin-bottom: 0px;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3%;
+}
 
 @media (max-width: 768px) {
   .mwb-form-main-container {
@@ -188,38 +207,95 @@ justify-content: center;
   .mwb-form-main-container {
     width: 95%;
   }
+  .select-form > select {
+    width: 70%;
+  }
+}
+
+@media (min-width: 769px) {
+  .container {
+    width: 50%;
+  }
 }
 
 
 table {
+  width: 800px;
   border-collapse: collapse;
-  border: 2px solid rgb(200,200,200);
-  letter-spacing: 1px;
-  font-size: 0.8rem;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
-
-td, th {
-  border: 1px solid rgb(190,190,190);
-  padding: 10px 20px;
-}
-
-th {
-  background-color: purple;
-  color:white;
-}
-
+th,
 td {
-  text-align: center;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  padding: 15px;
+  background-color: #fff;
+  color: #808080;
+}
+th {
+  text-align: left;
+}
+th:first-child{
+  border-right: 1px solid #fff;
+}
+thead th {
+  background-color: #202438;
+  color: #fff;
+  font-weight: unset;
+}
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+.user-list{
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+/* table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
+  font-size: 18px;
+  border-radius: 10px;
+  width:70%;
+  height:50%;
+  overflow: hidden;
+  background: white;
+  font-family: sans-serif;
+}
+
+tr >
+th {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px 20px;
+  background-color: #36304a;
+  color: #fff;
+  
+}
+
+
+
+td,tr {
+
+  height:5%;
+
 }
 
 tr:nth-child(even) td {
-  background-color: #e5b5e5;
+  color:#808080;
+  background-color: #f5f5f5;
 }
 
 tr:nth-child(odd) td {
-  background-color: rgb(245,245,245);
+  background-color:white;
 }
 
 caption {
   padding: 10px;
-}
+} */

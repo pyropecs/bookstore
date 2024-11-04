@@ -2,9 +2,7 @@ package com.library.repositories;
 
 import java.util.List;
 
-
 import javax.persistence.Query;
-
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,6 +39,7 @@ public class BookRepository {
         try {
             transaction = session.beginTransaction();
             Book book = session.get(Book.class, bookId);
+            book.getUsers().clear();
             for (Integer userId : userIds) {
                 User user = session.get(User.class, userId);
                 book.getUsers().add(user);
