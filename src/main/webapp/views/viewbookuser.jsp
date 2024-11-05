@@ -18,6 +18,7 @@
             <tbody>
                 <% 
                 List<Book> books = (List<Book>) request.getAttribute("books");
+                  if(!books.isEmpty()){
                 for (Book book : books) { 
                 %>
                 <tr>
@@ -43,7 +44,11 @@
                 </tr>
                 <% 
                 } 
-                %>
+              }else{ %>
+                <tr> <td>No Books found</td>
+                <td></td>
+                </tr>
+              <% } %>
             </tbody>
         </table>
         <a href="/bookstore" class="back-btn-link">

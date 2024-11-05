@@ -86,7 +86,8 @@
                                 </div>
 
 
-                                <div class="mwb-form-group">
+                                <div class="mwb-form-group flex">
+                                        <a href="/bookstore" style="width: 100%;"> <button type="button" class="mwb-form-submit-btn submit-back-btn" >Back</button></a>
                                         <button type="submit" class="mwb-form-submit-btn">Submit</button>
                                 </div>
                         </form>
