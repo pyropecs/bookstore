@@ -41,13 +41,12 @@ body {
 }
 /* CSS */
 .btn {
-  appearance: button;
-  backface-visibility: hidden;
+
+
   background-color: purple;
   border-radius: 6px;
   border-width: 0;
-  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
-    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
+
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
@@ -60,14 +59,11 @@ body {
   outline: none;
   overflow: hidden;
   padding: 0 25px;
-  position: relative;
+
   text-align: center;
-  text-transform: none;
-  transform: translateZ(0);
-  transition: all 0.2s, box-shadow 0.08s ease-in;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+
+
+
   width: 100%;
 }
 
@@ -79,11 +75,6 @@ body {
   cursor: default;
 }
 
-.btn:focus {
-  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
-    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
-    rgba(50, 151, 211, 0.3) 0 0 0 4px;
-}
 
 .mwb-form-main-wrapper {
   font-family: "Lato", sans-serif;
@@ -102,7 +93,8 @@ body {
   width: 50%;
 }
 .mwb-form-main-container form {
-  padding: 1% 3%;
+  padding: 2.5% 3%;
+  margin: 0%;
 }
 .mwb-form-main-container h1 {
   background-color: purple;
@@ -128,7 +120,7 @@ body {
   background-color: #ffffff;
   padding: 0 2px;
   top: -11px;
-  transition: 0.2s linear all;
+  
 }
 .mwb-form-control {
   background-color: #ffffff;
@@ -273,7 +265,7 @@ table {
   border-collapse: collapse;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
 }
 th,
 td {
@@ -283,6 +275,10 @@ td {
   padding: 15px;
   background-color: #fff;
   color: #808080;
+
+}
+td{
+  border: 1px solid;
 }
 th {
   text-align: left;

@@ -1,4 +1,4 @@
-<%@ page import="java.util.List,java.util.Set,com.library.models.Book,com.library.models.User" %>
+<%@ page import="java.util.List,java.util.Set,java.util.Iterator,com.library.models.Book,com.library.models.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
@@ -16,39 +16,43 @@
                 </tr>
             </thead>
             <tbody>
-                <% 
-                List<Book> books = (List<Book>) request.getAttribute("books");
-                  if(!books.isEmpty()){
-                for (Book book : books) { 
+                <%
+                    List<Book> books = (List<Book>) request.getAttribute("books");
+                    if (books != null && !books.isEmpty()) {
+                        for (Book book : books) {
                 %>
                 <tr>
+                    <td><%= book.getName() %></td>
                     <td>
-                        <%= book.getName() %>
-                    </td>
-                    <td>
-                        <% 
-                        Set<User> users = book.getUsers();
-                        if (users.isEmpty()) { 
+                        <%
+                            Set<User> users = book.getUsers();
+                            if (users.isEmpty()) {
                         %>
-                        No users found
-                        <% 
-                        } else { 
-                            for (User user : users) { 
+                            No users found
+                        <%
+                            } else {
+                                Iterator<User> iterator = users.iterator();
+                                while (iterator.hasNext()) {
+                                    User user = iterator.next();
                         %>
-                        <%= user.getUsername() %>,
-                        <% 
-                            } 
-                        } 
+                                    <%= user.getUsername() %><%= iterator.hasNext() ? ", " : "" %>
+                        <%
+                                }
+                            }
                         %>
                     </td>
                 </tr>
-                <% 
-                } 
-              }else{ %>
-                <tr> <td>No Books found</td>
-                <td></td>
+                <%
+                        }
+                    } else {
+                %>
+                <tr>
+                    <td>No Books found</td>
+                    <td></td>
                 </tr>
-              <% } %>
+                <%
+                    }
+                %>
             </tbody>
         </table>
         <a href="/bookstore" class="back-btn-link">
