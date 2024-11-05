@@ -38,7 +38,7 @@
                                                 <option value="" selected hidden disabled>Select Book
                                                 </option>
                                                 <% List<Book> books = (List<Book>) request.getAttribute("books");
-                                                        if (books != null) {
+                                                        if (!books.isEmpty()) {
                                                                         for (Book book : books) {
                                                 %>
                                                 <option value="<%= book.getId() %>">
@@ -63,7 +63,7 @@
 
 
                                         <% List<User> users = (List<User>) request.getAttribute("users");
-                                                if (users != null) {
+                                                if (!users.isEmpty()) {
                                                                 for (User user : users) {
                                         %>
                                         <div class="checkbox-container">

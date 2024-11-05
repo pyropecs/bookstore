@@ -74,7 +74,7 @@ function checkEmptySelected() {
   let isNotError = true;
   bookSelectError.classList.remove("show");
   if (bookSelect.value === "") {
-    bookSelectError.textContent = "Book name is required";
+    bookSelectError.textContent = "Book is required";
     bookSelectError.classList.add("show");
     isNotError = !isNotError;
   }
