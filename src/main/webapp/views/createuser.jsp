@@ -15,7 +15,7 @@
 			<h1>Create User</h1>
 			<form action="users/add" method="post" onSubmit="return checkAllValues()">
 			<%
-				String message = (String) request.getParameter("message");
+				String message = (String) request.getAttribute("message");
 				String messageClass = "";
 				
 				if (message != null && message.equals("User Created Successfully")) {

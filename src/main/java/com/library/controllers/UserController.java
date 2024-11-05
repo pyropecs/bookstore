@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.library.models.Book;
 import com.library.models.User;
@@ -59,17 +60,17 @@ public class UserController {
     }
 
     @PostMapping("/users/add")
-    public String createUser(@ModelAttribute User user, Model model) {
+    public String createUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
 
         try {
             userRepository.insertUser(user);
-            model.addAttribute("message", "User Created Successfully");
+            redirectAttributes.addFlashAttribute("message", "User Created Successfully");
             return "redirect:/users";
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
-            model.addAttribute("message", "Internal Server Error");
+            redirectAttributes.addFlashAttribute("message", "Internal Server Error");
             return "redirect:/users";
         }
     }

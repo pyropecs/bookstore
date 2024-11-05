@@ -19,7 +19,7 @@
                         <h1>Add Users To Book</h1>
                         <form action="addusers/insert" method="post" onSubmit="return checkEmptySelected()">
                                 <%
-                                    String message = (String) request.getParameter("message");
+                                    String message = (String) request.getAttribute("message");
                                     String messageClass = "";
 
                                     if (message != null && message.equals("Users added to the book sucessfully")) {
