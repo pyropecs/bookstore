@@ -11,22 +11,36 @@
 <body>
     
 <div class="mwb-form-main-wrapper">
-		<div class="mwb-form-main-container">
+	<div class="mwb-form-main-container">
 			<h1>Create User</h1>
 			<form action="users/add" method="post" onSubmit="return checkAllValues()">
-				<div class="mwb-form-group">
+			<%
+				String message = (String) request.getParameter("message");
+				String messageClass = "";
+				
+				if (message != null && message.equals("User Created Successfully")) {
+					messageClass = "success";
+				} else if (message != null && message.equals("Internal Server Error")) {
+					messageClass = "error";
+				} else {
+					messageClass = "success hide";
+					message = ""; 
+				}
+			%>
+			<p class="<%= messageClass %> text-center" id="message"><%= message %></p>
+			<div class="mwb-form-group">
 					<input type="text" class="mwb-form-control" placeholder="Enter your username*" value="" name="username" id="name">
 				
-					<div class="mwb-form-error" id="name-error">This Field Required*</div>
+					<div class="mwb-form-error" id="name-error"></div>
 				</div>
 				<div class="mwb-form-group">
 					<input type="text" class="mwb-form-control" placeholder="Enter your Department*" name="department" id="department">
 					
-					<div class="mwb-form-error" id="department-error">This Field Required*</div>
+					<div class="mwb-form-error" id="department-error"></div>
 				</div>
 				<div class="mwb-form-group">
 					<input type="text" class="mwb-form-control" placeholder="Enter your designation*" name="designation" id="designation">
-					<div class="mwb-form-error" id="designation-error">This Field Required*</div>
+					<div class="mwb-form-error" id="designation-error"></div>
 				</div>
 				
 				<div class="mwb-form-group flex">
@@ -36,6 +50,6 @@
 			</form>
 		</div>
 	</div>
-<script src="<c:url value='/js/create.js' />"></script>
+<script src="<c:url value='/js/index.js' />"></script>
 </body>
 </html>

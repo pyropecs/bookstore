@@ -8,18 +8,22 @@ function checkAllValues() {
     currentPath === "books"
       ? ["name", "author", "price"]
       : ["name", "department", "designation"];
-  const field1 = document.querySelector(`#${fields[0]}`);
-  const field2 = document.querySelector(`#${fields[1]}`);
-  const field3 = document.querySelector(`#${fields[2]}`);
+  const fieldElements = fields.map((field) =>
+    document.querySelector(`#${field}`)
+  );
+
   let isNotError = true;
 
-  isNotError = checkLengthError(field1, fields[0]);
-  isNotError = checkLengthError(field2, fields[1]);
-  isNotError = checkLengthError(field3, fields[2]);
+  fieldElements.forEach((fieldElement, index) => {
+    const isLengthValid = checkLengthError(fieldElement, fields[index]);
+    isNotError = isNotError && isLengthValid;
+  });
 
   if (fields[2] === "price") {
-    isNotError = checkNumber(field3, fields[2]);
+    const isNumberValid = checkNumber(fieldElements[2], fields[2]);
+    isNotError = isNotError && isNumberValid;
   }
+
   return isNotError;
 }
 function checkLengthError(element, field) {
@@ -52,6 +56,7 @@ function checkLengthError(element, field) {
     errorElement.classList.add("show");
     isNotError = !isNotError;
   }
+
   return isNotError;
 }
 
@@ -76,7 +81,7 @@ function checkEmptySelected() {
   return isNotError;
 }
 function checkNumber(element, field) {
-  const value = parseFloat(element.value);
+  const value = Number(element.value);
 
   const errorElement = document.querySelector(`#${field}-error`);
   let isNotError = true;
@@ -108,6 +113,15 @@ function checkNumber(element, field) {
     errorElement.textContent = errorMessage;
     errorElement.classList.add("show");
     isNotError = !isNotError;
+  } else if (element.value === "") {
+    const errorMessage =
+      String(field).charAt(0).toUpperCase() +
+      String(field).slice(1) +
+      " is required";
+
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add("show");
+    isNotError = !isNotError;
   }
   return isNotError;
 }
@@ -127,6 +141,45 @@ async function getUsers(e) {
       checkBox.checked = true;
     } else {
       checkBox.checked = false;
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const messageElement = document.querySelector("#message");
+  console.log(messageElement);
+
+  setTimeout(() => {
+    if (messageElement) {
+      messageElement.textContent = "";
+    }
+  }, 3000);
+});
+const currentUrlPaths = window.location.pathname
+  .split("/")
+  .filter((path) => path);
+const currentPath = currentUrlPaths[1];
+
+const fields =
+  currentPath === "books"
+    ? ["name", "author", "price"]
+    : ["name", "department", "designation"];
+
+if (currentPath === "books" || currentPath === "users") {
+  const fieldElements = fields.map((field) =>
+    document.querySelector(`#${field}`)
+  );
+
+  fieldElements.forEach((element, index) => {
+    // Create a function for length checking
+    const validateLength = () => checkLengthError(element, fields[index]);
+    element.addEventListener("input", validateLength);
+
+    if (fields[index] === "price") {
+      element.addEventListener("input", () => {
+        validateLength(); // Check length first
+        checkNumber(element, fields[index]);
+      });
     }
   });
 }
