@@ -4,10 +4,10 @@
         <id name="id" column="id">
             <generator class="identity" />
         </id>
-        <property name="username" column="username"/>
+        <property name="name" column="name"/>
         <property name="department" column="department" />
         <property name="designation" column="designation" />
-                <set name="books" table="books_users" inverse="true" cascade="all" lazy="false"> <!-- Change list to set -->
+                <set name="books" table="books_users" inverse="true" cascade="all" lazy="false"> 
             <key column="user_id" />
             <many-to-many column="book_id" class="com.library.models.Book" />
         </set>

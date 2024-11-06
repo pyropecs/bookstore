@@ -19,8 +19,9 @@ public class BookController {
     private BookRepository repository;
 
     @GetMapping("/books")
-    public String getCreateBookPage() {
-        return "createbook";
+    public String getCreateBookPage(Model model) {
+        model.addAttribute("path", "books");
+        return "createform";
     }
 
     @PostMapping("/books/add")
@@ -30,18 +31,20 @@ public class BookController {
             
             repository.insertBook(book);
             redirectAttributes.addFlashAttribute("message", "Book Created Successfully");
+            redirectAttributes.addFlashAttribute("path","books");
             return "redirect:/books";
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("message", "Internal Server Error");
+            redirectAttributes.addFlashAttribute("path","books");
             return "redirect:/books";
         }
     }
 
     @PostMapping("/addusers/insert")
-    public String insertUsersToBook(AdduserToBookForm form, RedirectAttributes redirectAttributes) {
+    public String insertUsersToBook(@ModelAttribute AdduserToBookForm form, RedirectAttributes redirectAttributes) {
 
         try {
             repository.insertUsersToBook(form.getBookId(), form.getUserIds());

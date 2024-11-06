@@ -7,7 +7,7 @@
         <property name="name" column="name"/>
         <property name="author" column="author" />
         <property name="price" column="price" />
-               <set name="users" table="books_users" cascade="all" lazy="false"> <!-- Change list to set -->
+               <set name="users" table="books_users" cascade="all" lazy="false">
             <key column="book_id" />
             <many-to-many column="user_id" class="com.library.models.User" />
         </set>

@@ -26,8 +26,9 @@ public class UserController {
     private BookRepository bookRepository;
 
     @GetMapping("/users")
-    public String createUserPage() {
-        return "createuser";
+    public String createUserPage(Model model) {
+        model.addAttribute("path","users");
+        return "createform";
     }
 
     @GetMapping("/users/all")
@@ -65,12 +66,14 @@ public class UserController {
         try {
             userRepository.insertUser(user);
             redirectAttributes.addFlashAttribute("message", "User Created Successfully");
+            redirectAttributes.addFlashAttribute("path","users");
             return "redirect:/users";
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("message", "Internal Server Error");
+            redirectAttributes.addFlashAttribute("path","users");
             return "redirect:/users";
         }
     }

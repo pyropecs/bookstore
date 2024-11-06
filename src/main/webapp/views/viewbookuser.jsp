@@ -35,7 +35,7 @@
                                 while (iterator.hasNext()) {
                                     User user = iterator.next();
                         %>
-                                    <%= user.getUsername() %><%= iterator.hasNext() ? ", " : "" %>
+                                    <%= user.getName() %><%= iterator.hasNext() ? ", " : "" %>
                         <%
                                 }
                             }

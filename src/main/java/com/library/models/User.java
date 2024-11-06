@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 public class User {
  private int id;
- private String username;
+ private String name;
  private String department;
  private String designation;
  @JsonBackReference
@@ -20,8 +20,9 @@ public class User {
  public String getDepartment() {
      return department;
  }
- public String getUsername() {
-     return username;
+
+ public String getName() {
+     return name;
  }
 
  public Set<Book> getBooks() {
@@ -36,9 +37,10 @@ public class User {
  public void setDesignation(String designation) {
      this.designation = designation;
  }
- public void setUsername(String username) {
-     this.username = username;
+ public void setName(String name) {
+     this.name = name;
  }
+
  public void setBooks(Set<Book> books) {
          this.books = books;
  }

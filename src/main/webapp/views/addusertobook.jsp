@@ -72,7 +72,7 @@
                                                         id="<%= user.getId() %>" value="<%=user.getId() %>" />
 
                                                 <label class="user-list" for="<%= user.getId() %>">
-                                                        <%= user.getUsername() %>
+                                                        <%= user.getName() %>
                                                 </label>
 
                                         </div>

@@ -1,4 +1,4 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
 <html lang="en">
 <head>
@@ -12,13 +12,20 @@
     
 <div class="mwb-form-main-wrapper">
 	<div class="mwb-form-main-container">
-			<h1>Create User</h1>
-			<form action="users/add" method="post" onSubmit="return checkAllValues()">
+		<%String path =  (String) request.getAttribute("path"); %>
+			<h1>Create <%=path.substring(0, 1).toUpperCase() + path.substring(1,path.length() - 1)%></h1>
+		
+			<form action="<%=path%>/add" method="post" onSubmit="return checkAllValues()">
 			<%
+				String[] fields = path.equals("books") 
+                   ? new String[]{"name", "author", "price"} 
+                   : new String[]{"name", "department", "designation"};
+
 				String message = (String) request.getAttribute("message");
+				
 				String messageClass = "";
 				
-				if (message != null && message.equals("User Created Successfully")) {
+				if (message != null && (message.equals("User Created Successfully") || message.equals("Book Created Successfully"))) {
 					messageClass = "success";
 				} else if (message != null && message.equals("Internal Server Error")) {
 					messageClass = "error";
@@ -29,18 +36,18 @@
 			%>
 			<p class="<%= messageClass %> text-center" id="message"><%= message %></p>
 			<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your username*" value="" name="username" id="name">
+					<input type="text" class="mwb-form-control" placeholder="Enter your <%=fields[0]%>*" value="" name="<%=fields[0]%>" id="<%=fields[0]%>">
 				
-					<div class="mwb-form-error" id="name-error"></div>
+					<div class="mwb-form-error" id="<%=fields[0]%>-error"></div>
 				</div>
 				<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your Department*" name="department" id="department">
+					<input type="text" class="mwb-form-control" placeholder="Enter your <%=fields[1]%>*" name="<%=fields[1]%>" id="<%=fields[1]%>">
 					
-					<div class="mwb-form-error" id="department-error"></div>
+					<div class="mwb-form-error" id="<%=fields[1]%>-error"></div>
 				</div>
 				<div class="mwb-form-group">
-					<input type="text" class="mwb-form-control" placeholder="Enter your designation*" name="designation" id="designation">
-					<div class="mwb-form-error" id="designation-error"></div>
+					<input type="text" class="mwb-form-control" placeholder="Enter your <%=fields[2]%>*" name="<%=fields[2]%>" id="<%=fields[2]%>">
+					<div class="mwb-form-error" id="<%=fields[2]%>-error"></div>
 				</div>
 				
 				<div class="mwb-form-group flex">
