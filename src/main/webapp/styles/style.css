@@ -270,8 +270,7 @@ table {
 th,
 td {
   max-width: 0;
-  overflow: hidden;
-  text-overflow:ellipsis;
+word-wrap: break-word;
   padding: 15px;
   background-color: #fff;
   color: #808080;

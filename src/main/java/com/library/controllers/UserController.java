@@ -3,6 +3,8 @@ package com.library.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,37 +29,40 @@ public class UserController {
 
     @GetMapping("/users")
     public String createUserPage(Model model) {
-        model.addAttribute("path","users");
+        model.addAttribute("path", "users");
         return "createform";
     }
 
     @GetMapping("/users/all")
-    public List<User> getAllUsers() {
-        List<User> users = null;
+    public ResponseEntity<List<User>> getAllUsers() {
+
         try {
-            users = userRepository.getAllUsers();
+            List<User> users = userRepository.getAllUsers();
+
+            return new ResponseEntity<>(users, HttpStatus.OK);
         } catch (Exception e) {
+
             System.out.println("Exception occurred: " + e.getMessage() + " UserController.getAllUsers()");
             e.printStackTrace();
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return users;
-
     }
 
-    @GetMapping("users/all/{id}")
+    @GetMapping("users/all/{bookid}")
     @ResponseBody
-    public List<User> getUsersWithBooks(@PathVariable("id") int bookid) {
-        List<User> users = null;
+    public ResponseEntity<List<User>> getUsersWithBooks(@PathVariable("bookid") int bookid) {
+       
         try {
-            users = userRepository.getAllUsers(bookid);
+            List<User> users = userRepository.getAllUsers(bookid);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("Exception occurred: " + e.getMessage() + " UserController.getUsersWithBooks()");
             e.printStackTrace();
-
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return users;
+    
     }
 
     @PostMapping("/users/add")
@@ -66,14 +71,14 @@ public class UserController {
         try {
             userRepository.insertUser(user);
             redirectAttributes.addFlashAttribute("message", "User Created Successfully");
-            redirectAttributes.addFlashAttribute("path","users");
+            redirectAttributes.addFlashAttribute("path", "users");
             return "redirect:/users";
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("message", "Internal Server Error");
-            redirectAttributes.addFlashAttribute("path","users");
+            redirectAttributes.addFlashAttribute("path", "users");
             return "redirect:/users";
         }
     }

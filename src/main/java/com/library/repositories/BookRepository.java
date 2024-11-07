@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import com.library.models.Book;
 import com.library.models.User;
@@ -25,6 +26,7 @@ public class BookRepository {
         } catch (Exception e) {
             System.out.println("Exception occurred " + e.getMessage() + " BookRepository.insertBook()");
             e.printStackTrace();
+
         } finally {
             session.close();
         }
@@ -54,6 +56,7 @@ public class BookRepository {
             e.printStackTrace();
         } finally {
             session.close();
+        
         }
     }
 

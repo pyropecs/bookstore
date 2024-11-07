@@ -1,17 +1,42 @@
+const currentUrlPaths = window.location.pathname
+  .split("/")
+  .filter((path) => path);
+const currentPath = currentUrlPaths[1];
+
+const fields =
+  currentPath === "books"
+    ? ["name", "author", "price"]
+    : ["name", "department", "designation"];
+
+const fieldElements = fields.map((field) =>
+  document.querySelector(`#${field}`)
+);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const messageElement = document.querySelector("#message");
+
+  setTimeout(() => {
+    if (messageElement) {
+      messageElement.textContent = "";
+    }
+  }, 3000);
+});
+
+if (currentPath === "books" || currentPath === "users") {
+  fieldElements.forEach((element, index) => {
+    const validateLength = () => checkLengthError(element, fields[index]);
+    element.addEventListener("input", validateLength);
+
+    if (fields[index] === "price") {
+      element.addEventListener("input", () => {
+        validateLength();
+        checkNumber(element, fields[index]);
+      });
+    }
+  });
+}
+
 function checkAllValues() {
-  const currentUrlPaths = window.location.pathname
-    .split("/")
-    .filter((path) => path);
-  const currentPath = currentUrlPaths[1];
-
-  const fields =
-    currentPath === "books"
-      ? ["name", "author", "price"]
-      : ["name", "department", "designation"];
-  const fieldElements = fields.map((field) =>
-    document.querySelector(`#${field}`)
-  );
-
   let isNotError = true;
 
   fieldElements.forEach((fieldElement, index) => {
@@ -61,8 +86,8 @@ function checkLengthError(element, field) {
 }
 
 function hasLeadingOrTrailingSpaces(str) {
-  const leadingSpace = /^\s/; // Checks for leading space
-  const trailingSpace = /\s$/; // Checks for trailing space
+  const leadingSpace = /^\s/;
+  const trailingSpace = /\s$/;
 
   return leadingSpace.test(str) || trailingSpace.test(str);
 }
@@ -141,45 +166,6 @@ async function getUsers(e) {
       checkBox.checked = true;
     } else {
       checkBox.checked = false;
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const messageElement = document.querySelector("#message");
-  console.log(messageElement);
-
-  setTimeout(() => {
-    if (messageElement) {
-      messageElement.textContent = "";
-    }
-  }, 3000);
-});
-const currentUrlPaths = window.location.pathname
-  .split("/")
-  .filter((path) => path);
-const currentPath = currentUrlPaths[1];
-
-const fields =
-  currentPath === "books"
-    ? ["name", "author", "price"]
-    : ["name", "department", "designation"];
-
-if (currentPath === "books" || currentPath === "users") {
-  const fieldElements = fields.map((field) =>
-    document.querySelector(`#${field}`)
-  );
-
-  fieldElements.forEach((element, index) => {
-    // Create a function for length checking
-    const validateLength = () => checkLengthError(element, fields[index]);
-    element.addEventListener("input", validateLength);
-
-    if (fields[index] === "price") {
-      element.addEventListener("input", () => {
-        validateLength(); // Check length first
-        checkNumber(element, fields[index]);
-      });
     }
   });
 }
