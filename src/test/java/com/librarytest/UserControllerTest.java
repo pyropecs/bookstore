@@ -65,7 +65,7 @@ public class UserControllerTest extends TestConfig {
 
     @Test
     public void checkFormRendered() throws Exception {
-        mockMvc.perform(get("/users")).andExpect(status().isOk()).andExpect(view().name("createform")).andExpect(forwardedUrl("/views/createform.jsp")).andExpect(model().size(1)).andExpect(model().attributeExists("path"));
+        mockMvc.perform(get("/users")).andExpect(status().isOk()).andExpect(view().name("createform")).andExpect(forwardedUrl("/views/createform.jsp")).andExpect(model().size(1)).andExpect(model().attributeExists("path")).andExpect(model().attribute("path", "users"));
     }
 
 
