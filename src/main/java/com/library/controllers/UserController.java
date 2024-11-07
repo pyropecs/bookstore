@@ -37,7 +37,7 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
 
         try {
-            List<User> users = userRepository.getAllUsers();
+            List<User> users = userRepository.getAllUsers(1);
 
             return new ResponseEntity<>(users, HttpStatus.OK);
         } catch (Exception e) {

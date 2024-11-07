@@ -32,15 +32,16 @@ public class BookController {
             repository.insertBook(book);
             redirectAttributes.addFlashAttribute("message", "Book Created Successfully");
             redirectAttributes.addFlashAttribute("path","books");
-            return "redirect:/books";
+            
         } catch (Exception e) {
             System.out.println("something went wrong UserController.createUser()");
             System.out.println(e.getMessage());
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("message", "Internal Server Error");
             redirectAttributes.addFlashAttribute("path","books");
-            return "redirect:/books";
+          
         }
+        return "redirect:/books";
     }
 
     @PostMapping("/addusers/insert")
@@ -49,14 +50,14 @@ public class BookController {
         try {
             repository.insertUsersToBook(form.getBookId(), form.getUserIds());
             redirectAttributes.addFlashAttribute("message", "Users added to the book sucessfully");
-            return "redirect:/addusers";
+           
         } catch (Exception e) {
             System.out.println("Exception occured:" + "AddUserBookController.insertUsersToBook()");
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("message", "Internal server error");
-            return "redirect:/addusers";
+            redirectAttributes.addFlashAttribute("message", "Internal Server Error");
+            
         }
-
+        return "redirect:/addusers";
     }
 
 }
