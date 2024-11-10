@@ -32,13 +32,13 @@ import com.library.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.WebApplicationContext;
-
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.ServletContext;
 
 import com.library.repositories.UserRepository;
 
-@RunWith(org.mockito.junit.MockitoJUnitRunner.class) // Ensure proper mock initialization
+@RunWith(MockitoJUnitRunner.class) // Ensure proper mock initialization
 public class BookRepositoryTest {
 
     @InjectMocks
@@ -53,8 +53,6 @@ public class BookRepositoryTest {
     @Mock
     private Criteria criteria;  // Mock Criteria
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
 
     @Mock
     private Transaction transaction;  // Mock Transaction
@@ -150,12 +148,14 @@ public class BookRepositoryTest {
         when(session.beginTransaction()).thenReturn(transaction);
         when(session.get(User.class, 1)).thenThrow(new NullPointerException());
         
+        String message = bookRepository.insertUsersToBook(book.getId(), Arrays.asList(user1.getId(), user2.getId()));
         Assert.assertNotNull(transaction);
-        verify(transaction).rollback();
-
+   verify(sessionFactory).openSession();
+        verify(session).beginTransaction();
+        verify(transaction).rollback(); // This verifies the rollback happens
+        verify(session).close();
   
     
-        String message = bookRepository.insertUsersToBook(book.getId(), Arrays.asList(user1.getId(), user2.getId()));
 
         Assert.assertEquals("something went wrong users couldn't be inserted.please try again later",message);
     }
