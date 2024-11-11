@@ -1,8 +1,11 @@
 package com.librarytest;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,32 +14,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.library.models.Book;
 import com.library.models.User;
 import com.library.repositories.BookRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockServletContext;
-import org.springframework.web.context.WebApplicationContext;
-import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.servlet.ServletContext;
-
-import com.library.repositories.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class) // Ensure proper mock initialization
 public class BookRepositoryTest {
@@ -76,22 +67,20 @@ public class BookRepositoryTest {
         book2.setName("second book");
         book2.setAuthor("author book2");
         book2.setPrice(32.4f);
-        // Setting up mock behavior
+       
         when(sessionFactory.openSession()).thenReturn(session);
-        when(session.createCriteria(Book.class)).thenReturn(criteria);
-        when(criteria.add(any())).thenReturn(criteria);
-        when(criteria.uniqueResult()).thenReturn(book);
+
     }
 
     @Test
     public void AddBookTest() {
-        // Call method to test
+   
         String message = bookRepository.insertBook(book);
 
-        // Assert the expected behavior
+       
         Assert.assertEquals("book created successfully", message);
 
-        // Verify interactions with the mocks
+    
         verify(session).save(book);
     }
 
@@ -131,6 +120,7 @@ public class BookRepositoryTest {
     }
 
     @Test
+  
     public void AddUsersToBookExceptionTest(){
         User user1 = new User();
         user1.setId(0);
@@ -150,9 +140,9 @@ public class BookRepositoryTest {
         
         String message = bookRepository.insertUsersToBook(book.getId(), Arrays.asList(user1.getId(), user2.getId()));
         Assert.assertNotNull(transaction);
-   verify(sessionFactory).openSession();
+         verify(sessionFactory).openSession();
         verify(session).beginTransaction();
-        verify(transaction).rollback(); // This verifies the rollback happens
+        verify(transaction).rollback();
         verify(session).close();
   
     
@@ -176,6 +166,7 @@ public class BookRepositoryTest {
 
 
     @Test
+   
     public void getAllBooksExceptionTest(){
         List<Book> books = new LinkedList<>();
         books.add(book);
